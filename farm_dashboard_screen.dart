@@ -4,6 +4,7 @@ import 'profile_screen.dart';
 import 'crops_info_screen.dart';
 import 'calendar_screen.dart';
 import 'lele_farm_screen.dart';
+import 'chatbot_screen.dart';
 
 class FarmDashboardScreen extends StatefulWidget {
   const FarmDashboardScreen({super.key});
@@ -193,7 +194,15 @@ class _FarmDashboardScreenState extends State<FarmDashboardScreen> {
                               return const Icon(Icons.smart_toy, size: 20);
                             },
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            // Navigate to chat bot screen
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ChatBotScreen(),
+                              ),
+                            );
+                          },
                           padding: EdgeInsets.zero,
                           iconSize: 24,
                         ),
@@ -248,7 +257,15 @@ class _FarmDashboardScreenState extends State<FarmDashboardScreen> {
                           );
                         },
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        // Navigate to chat bot screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ChatBotScreen(),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
