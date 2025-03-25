@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'crop_status_screen.dart';
+import '../fertilizer_recommendation_screen.dart';
 
 class ManualMonitoringScreenDetails extends StatelessWidget {
   const ManualMonitoringScreenDetails({super.key});
@@ -18,93 +19,94 @@ class ManualMonitoringScreenDetails extends StatelessWidget {
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildAppBar(context),
-                const SizedBox(height: 10),
-                const Text("Location:    Johor", style: TextStyle(fontSize: 16)),
-                const Text("Farm:          Zone A", style: TextStyle(fontSize: 16)),
-                const SizedBox(height: 10),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(
-                    'assets/weed_detection_result.jpg', // Replace with actual image
-                    width: double.infinity,
-                    // height: 140,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Center(
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        'assets/plant_stage.jpg', // Optional stage diagram
-                        height: 80,
-                      ),
-                      const SizedBox(height: 10),
-                      const Text(
-                        "Current Growth stage",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      const Text(
-                        "Flowering",
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const Text(
-                        "48 days left to\nharvesting",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 30),
-                const Text("Weed level", style: TextStyle(fontSize: 16)),
-                _weedSlider(),
-                const Center(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    child: Text(
-                      "The weed vegetation is serious,\ntake action now!",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 14, color: Colors.black),
+            child: SingleChildScrollView( // ✅ Enables vertical scrolling
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildAppBar(context),
+                  const SizedBox(height: 10),
+                  const Text("Location:    Johor", style: TextStyle(fontSize: 16)),
+                  const Text("Farm:          Zone A", style: TextStyle(fontSize: 16)),
+                  const SizedBox(height: 10),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.asset(
+                      'assets/weed_detection_result.jpg', // Replace with actual image
+                      width: double.infinity,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                ),
-                const Divider(thickness: 1, color: Colors.white70),
-                const SizedBox(height: 10),
-                const Text("Soil Condition", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    Image.asset('assets/soil_crack.jpg', height: 40), // Cracking image
-                    const SizedBox(width: 10),
-                    const Text("Cracking", style: TextStyle(fontSize: 16)),
-                    const Spacer(),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                  const SizedBox(height: 20),
+                  Center(
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/plant_stage.jpg', // Optional stage diagram
+                          height: 80,
                         ),
+                        const SizedBox(height: 10),
+                        const Text(
+                          "Current Growth stage",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        const Text(
+                          "Flowering",
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const Text(
+                          "48 days left to\nharvesting",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  const Text("Weed level", style: TextStyle(fontSize: 16)),
+                  _weedSlider(),
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: Text(
+                        "The weed vegetation is serious,\ntake action now!",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 14, color: Colors.black),
                       ),
-                      child: const Text("Take action now!"),
-                    )
-                  ],
-                ),
-                const Spacer(),
-                _actionButton(context, "Back to crop status", Colors.green),
-                const SizedBox(height: 10),
-                _actionButton(context, "Proceed to fertilizing", Colors.green),
-                const SizedBox(height: 10),
-              ],
+                    ),
+                  ),
+                  const Divider(thickness: 1, color: Colors.white70),
+                  const SizedBox(height: 10),
+                  const Text("Soil Condition", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Image.asset('assets/soil_crack.jpg', height: 40), // Cracking image
+                      const SizedBox(width: 10),
+                      const Text("Cracking", style: TextStyle(fontSize: 16)),
+                      const Spacer(),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                        child: const Text("Take action now!"),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 30),
+                  _actionButton(context, "Back to crop status", Colors.green),
+                  const SizedBox(height: 10),
+                  _actionButton2(context, "Proceed to fertilizing", Colors.green),
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
           ),
         ),
@@ -145,14 +147,31 @@ class ManualMonitoringScreenDetails extends StatelessWidget {
   Widget _actionButton(BuildContext context, String label, Color color) {
     return Center(
       child: ElevatedButton(
-        // onPressed: () {
-        //   // Add navigation logic
-        // },
         onPressed: () {
-          // Handle Next navigation here
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const CropStatusScreen()),
+          );
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: color,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+        ),
+        child: Text(label, style: const TextStyle(fontSize: 16)),
+      ),
+    );
+  }
+
+  Widget _actionButton2(BuildContext context, String label, Color color) {
+    return Center(
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const FertilizerRecommendationScreen()),
           );
         },
         style: ElevatedButton.styleFrom(

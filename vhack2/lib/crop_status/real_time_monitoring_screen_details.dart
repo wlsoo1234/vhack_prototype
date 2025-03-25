@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'crop_status_screen.dart';
+import '../fertilizer_recommendation_screen.dart';
 
 class RealTimeMonitoringScreenDetails extends StatelessWidget {
   const RealTimeMonitoringScreenDetails({super.key});
@@ -100,7 +101,7 @@ class RealTimeMonitoringScreenDetails extends StatelessWidget {
                   const SizedBox(height: 20), // replace Spacer() with spacing
                   _actionButton(context, "Back to crop status", Colors.green),
                   const SizedBox(height: 10),
-                  _actionButton(context, "Proceed to fertilizing", Colors.green),
+                  _actionButton2(context, "Proceed to fertilizing", Colors.green),
                   const SizedBox(height: 20),
                 ],
               ),
@@ -153,6 +154,31 @@ class RealTimeMonitoringScreenDetails extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const CropStatusScreen()),
+          );
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: color,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+        ),
+        child: Text(label, style: const TextStyle(fontSize: 16)),
+      ),
+    );
+  }
+
+  Widget _actionButton2(BuildContext context, String label, Color color) {
+    return Center(
+      child: ElevatedButton(
+        // onPressed: () {
+        //   // Add navigation logic
+        // },
+        onPressed: () {
+          // Handle Next navigation here
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const FertilizerRecommendationScreen()),
           );
         },
         style: ElevatedButton.styleFrom(
