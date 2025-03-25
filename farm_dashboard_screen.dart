@@ -382,4 +382,3 @@ class _FarmDashboardScreenState extends State<FarmDashboardScreen> {
     );
   }
 }
-
