@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import '../../task_detial.dart';
+import 'plant_rotation_screen.dart';
+import 'weather_screen.dart'; // Updated: Weather screen added
+import 'water_screen.dart';
+import 'humidity_screen.dart';
 
-class CalendarScreen extends StatefulWidget {
-  const CalendarScreen({super.key});
+class TaskDetailScreen extends StatefulWidget {
+  final String taskTitle;
+
+  const TaskDetailScreen({super.key, required this.taskTitle});
 
   @override
-  State<CalendarScreen> createState() => _CalendarTaskScreenState();
+  State<TaskDetailScreen> createState() => _TaskDetailScreenState();
 }
 
-class _CalendarTaskScreenState extends State<CalendarScreen> {
+class _TaskDetailScreenState extends State<TaskDetailScreen> {
+  String _selectedLocation = 'Kuala Lumpur';
   late DateTime _selectedDate;
   late DateTime _focusedDate;
-  bool _showTasks = false; // Start with the calendar view first
+  bool _showTasks = false;
+
+  final List<int> _highlightedDates = [9, 13, 25]; // Highlighted dates
 
   @override
   void initState() {
@@ -25,13 +33,13 @@ class _CalendarTaskScreenState extends State<CalendarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Calendar'),
+        title: Text(_selectedLocation),
         backgroundColor: Colors.grey[300],
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context); // Go back to the previous screen
+            Navigator.pop(context);
           },
         ),
         actions: [
@@ -39,7 +47,7 @@ class _CalendarTaskScreenState extends State<CalendarScreen> {
             icon: const Icon(Icons.menu),
             onPressed: () {
               setState(() {
-                _showTasks = !_showTasks; // Toggle the view
+                _showTasks = !_showTasks;
               });
             },
           ),
@@ -52,38 +60,38 @@ class _CalendarTaskScreenState extends State<CalendarScreen> {
     );
   }
 
-  // Build the task list view
   Widget _buildTaskList() {
     return Container(
       color: Colors.grey[200],
       child: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
-          _buildListItem('Task to do'),
           _buildListItem('Weather'),
           _buildListItem('Plant Rotation'),
-          _buildListItem('Water'),
+          _buildListItem('Watering Schedule'),
           _buildListItem('Humidity'),
         ],
       ),
     );
   }
 
-  // Build the calendar view
   Widget _buildCalendar() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Month display
         const Text(
           'March',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16),
         DropdownButton<String>(
-          value: 'Kuala Lumpur',
+          value: _selectedLocation,
           onChanged: (String? newValue) {
-            // Handle location change
+            if (newValue != null) {
+              setState(() {
+                _selectedLocation = newValue;
+              });
+            }
           },
           items:
               <String>[
@@ -98,8 +106,6 @@ class _CalendarTaskScreenState extends State<CalendarScreen> {
                 );
               }).toList(),
         ),
-
-        // Calendar widget
         Expanded(
           child: TableCalendar<DateTime>(
             firstDay: DateTime.utc(2020, 1, 1),
@@ -111,7 +117,7 @@ class _CalendarTaskScreenState extends State<CalendarScreen> {
             onDaySelected: (selectedDay, focusedDay) {
               setState(() {
                 _selectedDate = selectedDay;
-                _focusedDate = focusedDay; // Update the focused day
+                _focusedDate = focusedDay;
               });
             },
             onPageChanged: (focusedDay) {
@@ -130,28 +136,64 @@ class _CalendarTaskScreenState extends State<CalendarScreen> {
                 color: Colors.grey[300],
                 shape: BoxShape.circle,
               ),
+              markerDecoration: BoxDecoration(
+                color: Colors.red,
+                shape: BoxShape.circle,
+              ),
             ),
+            eventLoader: (day) {
+              return _highlightedDates.contains(day.day) ? [day] : [];
+            },
             headerStyle: HeaderStyle(
               formatButtonVisible: false,
               titleCentered: true,
             ),
           ),
         ),
+        const SizedBox(height: 16),
+        _buildBottomSection(), // ✅ Added the new bottom UI
       ],
     );
   }
 
-  // Helper method to build list items
+  Widget _buildBottomSection() {
+    return Column(
+      children: [
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Text(
+            '${_selectedDate.day} March\n remember to water the plant', // Shows selected date
+            style: const TextStyle(fontSize: 18, color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        const SizedBox(height: 10),
+        Container(
+          padding: const EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.grey),
+          ),
+          child: const Text(
+            '🤖 Recommendation: Ensure your plants are well-watered today!',
+            style: TextStyle(fontSize: 16),
+            textAlign: TextAlign.left,
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildListItem(String title) {
     return GestureDetector(
       onTap: () {
-        // Navigate to task detail screen when clicked
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => TaskDetailScreen(taskTitle: title),
-          ),
-        );
+        _navigateToScreen(title); // ✅ Call function to navigate
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8.0),
@@ -170,5 +212,26 @@ class _CalendarTaskScreenState extends State<CalendarScreen> {
         child: Text(title, style: const TextStyle(fontSize: 18)),
       ),
     );
+  }
+
+  /// **🔹 Navigation Function**
+  void _navigateToScreen(String title) {
+    Widget screen;
+    switch (title) {
+      case 'Weather':
+        screen = const WeatherScreen(); // Navigates to WeatherScreen
+        break;
+      case 'Plant Rotation':
+        screen = const PlantRotation(); // Navigates to Plant Rotation
+        break;
+      case 'Humidity':
+        screen = const HumidityScreen(); // ✅ Navigates to HumidityScreen
+        break;
+      default:
+        screen = const WaterScreen();
+        break;
+    }
+
+    Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
   }
 }
