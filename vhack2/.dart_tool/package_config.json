@@ -51,7 +51,7 @@
     },
     {
       "name": "fl_chart",
-      "rootUri": "file:///C:/Users/soowe/AppData/Local/Pub/Cache/hosted/pub.dev/fl_chart-0.35.0",
+      "rootUri": "file:///C:/Users/soowe/AppData/Local/Pub/Cache/hosted/pub.dev/fl_chart-0.55.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -146,12 +146,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "pedantic",
-      "rootUri": "file:///C:/Users/soowe/AppData/Local/Pub/Cache/hosted/pub.dev/pedantic-1.11.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "percent_indicator",
       "rootUri": "file:///C:/Users/soowe/AppData/Local/Pub/Cache/hosted/pub.dev/percent_indicator-3.4.0",
       "packageUri": "lib/",
@@ -242,7 +236,7 @@
       "languageVersion": "3.7"
     }
   ],
-  "generated": "2025-03-25T20:47:01.864156Z",
+  "generated": "2025-03-25T22:23:55.138766Z",
   "generator": "pub",
   "generatorVersion": "3.7.0",
   "flutterRoot": "file:///C:/Users/soowe/OneDrive/Documents/GitHub/flutter",

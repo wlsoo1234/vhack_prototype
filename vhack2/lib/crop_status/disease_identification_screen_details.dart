@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../fertilizer_recommendation_screen.dart';
 
 class DiseaseResultStructuredScreen extends StatelessWidget {
   const DiseaseResultStructuredScreen({super.key});
@@ -67,10 +68,12 @@ class DiseaseResultStructuredScreen extends StatelessWidget {
 
               // ✅ Navigation Buttons
               _greenButton('Back to crop status', () {
-                // Handle back
-              }),
+                  // Add to to-do action
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const FertilizerRecommendationScreen()));
+                },
+              ),
               const SizedBox(height: 10),
-              _greenButton('Proceed to fertilizing', () {
+              _greenButton2('Proceed to fertilizing', () {
                 // Handle proceed
               }),
             ],
@@ -144,6 +147,20 @@ class DiseaseResultStructuredScreen extends StatelessWidget {
   }
 
   Widget _greenButton(String label, VoidCallback onPressed) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.greenAccent[400],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+      ),
+      child: Text(label, style: const TextStyle(fontSize: 16)),
+    );
+  }
+
+  Widget _greenButton2(String label, VoidCallback onPressed) {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
