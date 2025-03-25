@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'weather_screen.dart'; // Import the WeatherScreen
-// import 'plant_rotation_screen.dart'; // Import the PlantRotationScreen
+import 'weatherdata_screen.dart'; // Import the WeatherScreen
 import 'waterdata_screen.dart';
-// import 'humidity_screen.dart'; // Import the HumidityScreen
-// import 'profile_screen.dart'; // Import the ProfileScreen
+import 'map_screen.dart'; // Import the MapScreen
 
 class LeleFarmScreen extends StatelessWidget {
   const LeleFarmScreen({super.key});
@@ -119,13 +117,13 @@ class LeleFarmScreen extends StatelessWidget {
               context,
             ),
             _buildClickableStatusIndicator(
-              'Today\'s soil level is ok',
-              Icons.grass,
+              'Today\'s crop status is ok',
+              Icons.grass_rounded,
               context,
             ),
             _buildClickableStatusIndicator(
-              'Today\'s pest control level is ok',
-              Icons.bug_report,
+              'Today\'s soil level is ok',
+              Icons.surfing_outlined,
               context,
             ),
           ],
@@ -147,7 +145,10 @@ class LeleFarmScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Placeholder for map functionality
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MapScreen()),
+          );
         },
         backgroundColor: Colors.blue,
         child: const Icon(Icons.map, size: 30, color: Colors.white),
@@ -188,23 +189,15 @@ class LeleFarmScreen extends StatelessWidget {
   void _navigateToScreen(String title, BuildContext context) {
     Widget screen;
     switch (title) {
-      // case 'Today\'s weather is bad':
-      //   screen =
-      //       const WeatherScreen(); // Replace with your actual WeatherScreen
-      //   break;
+      case 'Today\'s weather is bad':
+        screen = const WeatherData(); // Navigate to WeatherData
+        break;
       case 'Today\'s water level is moderate':
-        screen = WaterData(); // Replace with your actual WaterScreen
+        screen = WaterData(); // Navigate to WaterData
         break;
-      // case 'Today\'s soil level is ok':
-      //   screen = const SoilScreen(); // Replace with your actual SoilScreen
-      //    break;
-      //   case 'Today\'s pest control level is ok':
-      //     screen =
-      //         const PestControlScreen(); // Replace with your actual PestControlScreen
-      //      break;
+      // Add other cases as needed
       default:
-        screen = const LeleFarmScreen(); // Default to LeleFarmScreen
-        break;
+        return; // Do nothing for unrecognized titles
     }
 
     Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
