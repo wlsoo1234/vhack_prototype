@@ -9,10 +9,10 @@ class HumidityScreen extends StatefulWidget {
   const HumidityScreen({super.key});
 
   @override
-  State<HumidityScreen> createState() => _WeatherScreenState();
+  State<HumidityScreen> createState() => _HumidityScreenState();
 }
 
-class _WeatherScreenState extends State<HumidityScreen> {
+class _HumidityScreenState extends State<HumidityScreen> {
   late DateTime _selectedDate;
   late DateTime _focusedDate;
   String _selectedLocation = 'Kuala Lumpur';
@@ -25,31 +25,39 @@ class _WeatherScreenState extends State<HumidityScreen> {
     _focusedDate = DateTime.now();
   }
 
-  // Updated percentage-based weather data
-  final Map<int, String> weatherData = {
+  // 📌 Humidity data for each day
+  final Map<int, String> humidityData = {
     1: '40%',
-    2: '60%',
-    3: '34%',
-    4: '47%',
-    5: '77%',
-    6: '21%',
-    7: '20%',
+    2: '80%',
+    3: '20%',
+    4: '52%',
+    5: '23%',
+    6: '11%',
+    7: '47%',
     8: '34%',
-    9: '1%',
-    10: '32%',
-    11: '20%',
-    12: '52%',
-    13: '23%',
-    14: '12%',
-    15: '22%',
-    16: '30%',
+    9: '47%',
+    10: '12%',
+    11: '22%',
+    12: '30%',
+    13: '40%',
+    14: '50%',
+    15: '77%',
+    16: '21%',
     17: '43%',
     18: '23%',
     19: '32%',
-    20: '37%',
-    21: '41%',
-    22: '26%',
-    23: '14%',
+    20: '14%',
+    21: '30%',
+    22: '20%',
+    23: '34%',
+    24: '35%',
+    25: '47%',
+    26: '26%',
+    27: '78%',
+    28: '32%',
+    29: '11%',
+    30: '32%',
+    31: '14%',
   };
 
   @override
@@ -67,10 +75,10 @@ class _WeatherScreenState extends State<HumidityScreen> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.menu), // Menu button for task list
+            icon: const Icon(Icons.menu), // Toggle task list
             onPressed: () {
               setState(() {
-                _showTasks = !_showTasks; // Toggle task list
+                _showTasks = !_showTasks;
               });
             },
           ),
@@ -83,7 +91,7 @@ class _WeatherScreenState extends State<HumidityScreen> {
     );
   }
 
-  /// 🌱 **Task List View**
+  /// **📌 Task List View**
   Widget _buildTaskList() {
     return Container(
       color: Colors.grey[200],
@@ -99,7 +107,7 @@ class _WeatherScreenState extends State<HumidityScreen> {
     );
   }
 
-  /// 📅 **Calendar View**
+  /// **📅 Calendar View**
   Widget _buildCalendar() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,7 +127,7 @@ class _WeatherScreenState extends State<HumidityScreen> {
             }
           },
           items:
-              <String>[
+              [
                 'Kuala Lumpur',
                 'Johor Bahru',
                 'Melaka',
@@ -180,7 +188,7 @@ class _WeatherScreenState extends State<HumidityScreen> {
                         ),
                       ),
                       Text(
-                        weatherData[day.day] ?? '',
+                        humidityData[day.day] ?? '',
                         style: const TextStyle(fontSize: 14),
                       ),
                     ],
@@ -190,31 +198,71 @@ class _WeatherScreenState extends State<HumidityScreen> {
             ),
           ),
         ),
+        const SizedBox(height: 16),
+        _buildBottomSection(),
       ],
     );
   }
 
-  Widget _buildListItem(String title) {
-    return GestureDetector(
-      onTap: () {
-        _navigateToScreen(title); // ✅ Call function to navigate
-      },
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 8.0),
-        padding: const EdgeInsets.all(16.0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 4,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Text(title, style: const TextStyle(fontSize: 18)),
+  /// **📌 Bottom Section (Humidity Details)**
+  Widget _buildBottomSection() {
+    String humidity = humidityData[_selectedDate.day] ?? 'N/A';
+
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: const Color.fromRGBO(224, 224, 224, 1),
+        borderRadius: BorderRadius.circular(10),
       ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '${_selectedDate.day} Mar',
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          Text('Humidity: $humidity', style: const TextStyle(fontSize: 16)),
+          const SizedBox(height: 16),
+
+          // ✅ Fixed size grey boxes for better alignment
+          _buildGreyBox("🌱 Soil Moisture: Keep soil slightly damp"),
+          const SizedBox(height: 8),
+          _buildGreyBox("☀️ Sunlight: Moderate sunlight is recommended"),
+          const SizedBox(height: 8),
+          _buildGreyBox("💨 Ventilation: Ensure good air circulation"),
+        ],
+      ),
+    );
+  }
+
+  /// **📌 Grey Box with Fixed Size**
+  Widget _buildGreyBox(String text) {
+    return Container(
+      height: 50, // Fixed height for uniform size
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.grey),
+      ),
+      child: Text(
+        text,
+        style: const TextStyle(fontSize: 16),
+        textAlign: TextAlign.left,
+      ),
+    );
+  }
+
+  /// **📌 Task List Item**
+  Widget _buildListItem(String title) {
+    return ListTile(
+      title: Text(title, style: const TextStyle(fontSize: 18)),
+      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+      onTap: () {
+        _navigateToScreen(title);
+      },
     );
   }
 
@@ -223,13 +271,13 @@ class _WeatherScreenState extends State<HumidityScreen> {
     Widget screen;
     switch (title) {
       case 'Weather':
-        screen = const WeatherScreen(); // Navigates to WeatherScreen
+        screen = const WeatherScreen();
         break;
       case 'Plant Rotation':
-        screen = const PlantRotation(); // Navigates to Plant Rotation
+        screen = const PlantRotation();
         break;
       case 'Water':
-        screen = const WaterScreen(); // ✅ Navigates to WaterScreen
+        screen = const WaterScreen();
         break;
       default:
         screen = TaskDetailScreen(taskTitle: title);

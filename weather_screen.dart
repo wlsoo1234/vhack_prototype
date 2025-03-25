@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
+import 'package:table_calendar/table_calendar.dart'; // Keep this import as it is used for the calendar
 import 'plant_rotation_screen.dart';
 import 'task_detial_screen.dart';
 import 'water_screen.dart';
@@ -20,7 +20,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
   @override
   void initState() {
     super.initState();
-    _selectedDate = DateTime.now();
+    _selectedDate = DateTime.now(); // Set to current date
     _focusedDate = DateTime.now();
   }
 
@@ -28,7 +28,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
   final Map<int, String> weatherData = {
     1: '☀️',
     2: '🌧️',
-    3: '🌧️',
+    3: '☀️', // Current day
     4: '☀️',
     5: '',
     6: '🌥️',
@@ -50,8 +50,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
     22: '🌥️',
     23: '☀️',
     24: '',
-    25: '',
-    26: '⛈️',
+    25: '☀️', // Today's weather
+    26: '🌧️',
     27: '',
     28: '🌧️',
     29: '',
@@ -197,7 +197,76 @@ class _WeatherScreenState extends State<WeatherScreen> {
             ),
           ),
         ),
+        const SizedBox(height: 20), // Space between calendar and weather info
+        _buildWeatherInfo(), // New weather info section
       ],
+    );
+  }
+
+  /// **Weather Info Section**
+  Widget _buildWeatherInfo() {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.wb_sunny, size: 50, color: Colors.yellow),
+              const SizedBox(width: 10),
+              Text(
+                '${_selectedDate.day} Mar', // Dynamically display the selected date
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Container(
+            height: 100, // Height for the notes area
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: Colors.grey),
+            ),
+            child: const Center(
+              child: Text(
+                'Additional weather details or notes can go here.',
+                style: TextStyle(fontSize: 16, color: Colors.grey),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          // Robot recommendation section
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: Colors.grey),
+            ),
+            child: const Text(
+              '🤖 Recommendation: It\'s a sunny day! Great for outdoor activities like a picnic or a walk in the park.',
+              style: TextStyle(fontSize: 16),
+              textAlign: TextAlign.left,
+            ),
+          ),
+        ],
+      ),
     );
   }
 

@@ -145,21 +145,72 @@ class _PlantRotationState extends State<PlantRotation> {
             ),
           ),
         ),
+        const SizedBox(height: 16),
+        _buildLegend(), // ✅ New: Legend added here
       ],
     );
   }
 
+  /// **🌱 Function to Determine Color Based on Day**
   Color _getDayColor(int day) {
-    if (day >= 1 && day <= 8) {
-      return Colors.blueAccent;
-    } else if (day >= 9 && day <= 15) {
-      return Colors.redAccent;
-    } else if (day >= 16 && day <= 22) {
-      return Colors.greenAccent;
-    } else if (day >= 23 && day <= 31) {
-      return Colors.orangeAccent;
+    if (day >= 1 && day <= 7) {
+      return Colors.green; // Tomato
+    } else if (day >= 8 && day <= 21) {
+      return Colors.red; // Rice
+    } else if (day >= 22 && day <= 31) {
+      return Colors.grey; // Soybean
     }
     return Colors.transparent;
+  }
+
+  /// **📌 Legend Section**
+  Widget _buildLegend() {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _legendItem(Colors.green, "Tomato"),
+            const SizedBox(width: 16),
+            _legendItem(Colors.red, "Rice"),
+            const SizedBox(width: 16),
+            _legendItem(Colors.grey, "Soybean"),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Container(
+          padding: const EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.grey),
+          ),
+          child: const Text(
+            '🤖 Recommendation: Ensure your plants are well-watered today!',
+            style: TextStyle(fontSize: 16),
+            textAlign: TextAlign.left,
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// **📌 Helper Widget for Legend**
+  Widget _legendItem(Color color, String text) {
+    return Row(
+      children: [
+        Container(
+          width: 20,
+          height: 20,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(4),
+          ),
+        ),
+        const SizedBox(width: 8),
+        Text(text, style: const TextStyle(fontSize: 16)),
+      ],
+    );
   }
 
   Widget _buildListItem(String title) {

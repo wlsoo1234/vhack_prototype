@@ -49,7 +49,7 @@ class _WaterScreenState extends State<WaterScreen> {
     20: '',
     21: '💧',
     22: '💧💧',
-    23: '💧',
+    23: '💧', // 👈 March 23 should display a single 💧
     24: '',
     25: '',
     26: '💧💧💧',
@@ -189,9 +189,7 @@ class _WaterScreenState extends State<WaterScreen> {
                       ),
                       Text(
                         waterUsage[day.day] ?? '',
-                        style: const TextStyle(
-                          fontSize: 12, // Smaller font size for 💧
-                        ),
+                        style: const TextStyle(fontSize: 12),
                       ),
                     ],
                   ),
@@ -200,14 +198,70 @@ class _WaterScreenState extends State<WaterScreen> {
             ),
           ),
         ),
+        const SizedBox(height: 20),
+        _buildWaterInfo(),
       ],
+    );
+  }
+
+  /// **Water Info Section**
+  Widget _buildWaterInfo() {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                '${_selectedDate.day} Mar',
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(width: 10),
+              // Show the correct water usage emoji instead of an icon
+              Text(
+                waterUsage[_selectedDate.day] ?? '',
+                style: const TextStyle(fontSize: 40),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: Colors.grey),
+            ),
+            child: const Text(
+              '🤖 Recommendation: Ensure your plants are well-watered today!',
+              style: TextStyle(fontSize: 16),
+              textAlign: TextAlign.left,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildListItem(String title) {
     return GestureDetector(
       onTap: () {
-        _navigateToScreen(title); // ✅ Call function to navigate
+        _navigateToScreen(title);
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8.0),
@@ -215,37 +269,28 @@ class _WaterScreenState extends State<WaterScreen> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 4,
-              offset: const Offset(0, 2),
-            ),
-          ],
         ),
         child: Text(title, style: const TextStyle(fontSize: 18)),
       ),
     );
   }
 
-  /// **🔹 Navigation Function**
   void _navigateToScreen(String title) {
     Widget screen;
     switch (title) {
       case 'Weather':
-        screen = const WeatherScreen(); // Navigates to WeatherScreen
+        screen = const WeatherScreen();
         break;
       case 'Plant Rotation':
-        screen = const PlantRotation(); // Navigates to Plant Rotation
+        screen = const PlantRotation();
         break;
       case 'Humidity':
-        screen = const HumidityScreen(); //✅ Navigates to WaterScreen
+        screen = const HumidityScreen();
         break;
       default:
         screen = TaskDetailScreen(taskTitle: title);
         break;
     }
-
     Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
   }
 }

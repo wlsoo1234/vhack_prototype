@@ -150,6 +150,42 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
             ),
           ),
         ),
+        const SizedBox(height: 16),
+        _buildBottomSection(), // ✅ Added the new bottom UI
+      ],
+    );
+  }
+
+  Widget _buildBottomSection() {
+    return Column(
+      children: [
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Text(
+            '${_selectedDate.day} March\n remember to water the plant', // Shows selected date
+            style: const TextStyle(fontSize: 18, color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        const SizedBox(height: 10),
+        Container(
+          padding: const EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.grey),
+          ),
+          child: const Text(
+            '🤖 Recommendation: Ensure your plants are well-watered today!',
+            style: TextStyle(fontSize: 16),
+            textAlign: TextAlign.left,
+          ),
+        ),
       ],
     );
   }
@@ -189,7 +225,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
         screen = const PlantRotation(); // Navigates to Plant Rotation
         break;
       case 'Humidity':
-        screen = const HumidityScreen(); //✅ Navigates to WaterScreen
+        screen = const HumidityScreen(); // ✅ Navigates to HumidityScreen
         break;
       default:
         screen = const WaterScreen();

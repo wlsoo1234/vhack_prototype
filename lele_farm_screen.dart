@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'weatherdata_screen.dart'; // Import the WeatherScreen
 import 'waterdata_screen.dart';
 import 'map_screen.dart'; // Import the MapScreen
+import 'soil_screen.dart';
 
 class LeleFarmScreen extends StatelessWidget {
   const LeleFarmScreen({super.key});
@@ -194,6 +195,9 @@ class LeleFarmScreen extends StatelessWidget {
         break;
       case 'Today\'s water level is moderate':
         screen = WaterData(); // Navigate to WaterData
+        break;
+      case 'Today\'s soil level is ok':
+        screen = SoilStatusScreen(); // Navigate to WaterData
         break;
       // Add other cases as needed
       default:
