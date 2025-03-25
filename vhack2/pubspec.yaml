@@ -36,8 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   table_calendar: ^3.2.0
   percent_indicator: ^3.0.1
-  fl_chart: ^0.55.1  
-  flutter_svg: ^0.22.0
+  fl_chart: ^0.70.2
+  # flutter_svg: ^0.22.0
 
 dev_dependencies:
   flutter_test:

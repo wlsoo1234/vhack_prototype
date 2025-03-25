@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../fertilizer_recommendation_screen.dart';
+import 'crop_status_screen.dart';
 
 class DiseaseResultStructuredScreen extends StatelessWidget {
   const DiseaseResultStructuredScreen({super.key});
@@ -23,7 +24,7 @@ class DiseaseResultStructuredScreen extends StatelessWidget {
                 child: Image.asset(
                   'assets/disease_detected.jpg', // Replace with actual image
                   width: double.infinity,
-                  height: 240,
+                  // height: 240,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -69,12 +70,13 @@ class DiseaseResultStructuredScreen extends StatelessWidget {
               // ✅ Navigation Buttons
               _greenButton('Back to crop status', () {
                   // Add to to-do action
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const FertilizerRecommendationScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const CropStatusScreen()));
                 },
               ),
               const SizedBox(height: 10),
-              _greenButton2('Proceed to fertilizing', () {
+              _greenButton('Proceed to fertilizing', () {
                 // Handle proceed
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const FertilizerRecommendationScreen()));
               }),
             ],
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'crop_status/crop_status_screen.dart';
 
 class TaskToDoScreen extends StatefulWidget {
   const TaskToDoScreen({super.key});
@@ -110,8 +111,10 @@ class _TaskToDoScreenState extends State<TaskToDoScreen> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.popUntil(context, (route) => route.isFirst); // Go back to home
-
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const CropStatusScreen()),
+                  );
                   // Delay the SnackBar so it's shown after the navigation completes
                   Future.delayed(const Duration(milliseconds: 300), () {
                     ScaffoldMessenger.of(context).showSnackBar(

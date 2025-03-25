@@ -51,9 +51,9 @@
     },
     {
       "name": "fl_chart",
-      "rootUri": "file:///C:/Users/soowe/AppData/Local/Pub/Cache/hosted/pub.dev/fl_chart-0.55.2",
+      "rootUri": "file:///C:/Users/soowe/AppData/Local/Pub/Cache/hosted/pub.dev/fl_chart-0.70.2",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.2"
     },
     {
       "name": "flutter",
@@ -66,12 +66,6 @@
       "rootUri": "file:///C:/Users/soowe/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-5.0.0",
       "packageUri": "lib/",
       "languageVersion": "3.5"
-    },
-    {
-      "name": "flutter_svg",
-      "rootUri": "file:///C:/Users/soowe/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-0.22.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
     },
     {
       "name": "flutter_test",
@@ -134,28 +128,10 @@
       "languageVersion": "3.4"
     },
     {
-      "name": "path_drawing",
-      "rootUri": "file:///C:/Users/soowe/AppData/Local/Pub/Cache/hosted/pub.dev/path_drawing-0.5.1+1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "path_parsing",
-      "rootUri": "file:///C:/Users/soowe/AppData/Local/Pub/Cache/hosted/pub.dev/path_parsing-0.2.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "percent_indicator",
       "rootUri": "file:///C:/Users/soowe/AppData/Local/Pub/Cache/hosted/pub.dev/percent_indicator-3.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
-    },
-    {
-      "name": "petitparser",
-      "rootUri": "file:///C:/Users/soowe/AppData/Local/Pub/Cache/hosted/pub.dev/petitparser-5.4.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.19"
     },
     {
       "name": "simple_gesture_detector",
@@ -224,19 +200,13 @@
       "languageVersion": "3.3"
     },
     {
-      "name": "xml",
-      "rootUri": "file:///C:/Users/soowe/AppData/Local/Pub/Cache/hosted/pub.dev/xml-5.4.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.16"
-    },
-    {
       "name": "vhack2",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     }
   ],
-  "generated": "2025-03-25T22:23:55.138766Z",
+  "generated": "2025-03-25T22:30:22.982252Z",
   "generator": "pub",
   "generatorVersion": "3.7.0",
   "flutterRoot": "file:///C:/Users/soowe/OneDrive/Documents/GitHub/flutter",

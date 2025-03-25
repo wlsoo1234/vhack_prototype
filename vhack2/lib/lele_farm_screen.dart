@@ -3,6 +3,7 @@ import 'weatherdata_screen.dart'; // Import the WeatherScreen
 import 'waterdata_screen.dart';
 import 'map_screen.dart'; // Import the MapScreen
 import 'soil_screen.dart';
+import 'crop_status/crop_status_screen.dart';
 
 class LeleFarmScreen extends StatelessWidget {
   const LeleFarmScreen({super.key});
@@ -127,6 +128,29 @@ class LeleFarmScreen extends StatelessWidget {
               Icons.surfing_outlined,
               context,
             ),
+
+            Center(
+              child: Container(
+                margin: const EdgeInsets.only(top: 20),
+                child: ElevatedButton(
+                  onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const CropStatusScreen()),
+                      );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.greenAccent[400],
+                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  child: const Text('Crop Status Check', style: TextStyle(fontSize: 16)),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
           ],
         ),
       ),
