@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'crop_status/crop_status_screen.dart';
 
 class LeleFarmScreen extends StatelessWidget {
   const LeleFarmScreen({super.key});
@@ -113,6 +114,40 @@ class LeleFarmScreen extends StatelessWidget {
               'Today\'s pest control level is ok',
               Icons.bug_report,
             ),
+
+
+//############################
+            SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: SizedBox(
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
+                    onPressed: () {
+                      // Do something here
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const CropStatusScreen()),
+                      );
+                    },
+                    child: const Text(
+                      'Take Action',
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
           ],
         ),
       ),
